@@ -5,152 +5,464 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SMOU GROUP | فيديوهات الأسود</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --bg1:#050b14;
-  --bg2:#0a1c33;
-  --glass: rgba(255,255,255,.08);
-  --border: rgba(255,255,255,.18);
-  --text:#ffffff;
-  --muted:rgba(255,255,255,.75);
+  --bg1:#020304;
+  --bg2:#0a0c10;
+  --bg3:#010101;
+  --sky:#8fd6ff;
+  --sky-light:#d7f1ff;
+  --onyx-1:#f4f6f8;
+  --onyx-2:#a9b3bd;
+  --onyx-3:#5b636b;
+  --onyx-deep:#1c2024;
+  --ivory:#ffffff;
+  --text:#f2f4f6;
+  --muted:rgba(242,244,246,.65);
+  --border:rgba(169,179,189,.20);
+  --border-strong:rgba(230,234,238,.4);
+  --glass: linear-gradient(160deg, rgba(255,255,255,.06), rgba(255,255,255,.012));
+  --shadow:0 18px 45px rgba(0,0,0,.55);
+  --shadowStrong:0 30px 90px rgba(0,0,0,.75);
 }
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
+::selection{background:rgba(169,179,189,.32); color:#0a0c10}
+
 body{
   margin:0;
   font-family:"Tajawal",sans-serif;
   color:var(--text);
   background:
-  radial-gradient(800px 400px at 20% 20%, rgba(0,150,255,.15), transparent 60%),
-  linear-gradient(180deg,var(--bg1),var(--bg2));
+    radial-gradient(1000px 480px at 15% 6%, rgba(143,214,255,.09), transparent 55%),
+    radial-gradient(900px 420px at 88% 14%, rgba(255,255,255,.05), transparent 55%),
+    radial-gradient(700px 500px at 50% 100%, rgba(20,24,28,.4), transparent 60%),
+    linear-gradient(180deg,var(--bg1),var(--bg2) 55%,var(--bg3));
   min-height:100vh;
+  position:relative;
+  overflow-x:hidden;
 }
-.wrap{max-width:1100px;margin:auto;padding:20px}
 
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  mix-blend-mode:overlay;
+}
+
+.orb{
+  position:fixed;
+  width:34vw;height:34vw;
+  border-radius:50%;
+  filter:blur(120px);
+  opacity:.12;
+  pointer-events:none;
+  z-index:0;
+  animation:blobFloat 14s ease-in-out infinite;
+}
+.orb.a{top:-10vw; right:-8vw; background:radial-gradient(circle, rgba(143,214,255,.7), transparent 65%);}
+.orb.b{left:-10vw; bottom:-12vw; width:30vw;height:30vw; background:radial-gradient(circle, rgba(255,255,255,.25), transparent 62%); animation-delay:-6s;}
+@keyframes blobFloat{ 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-18px) scale(1.06)} }
+
+.wrap{position:relative; z-index:1; max-width:1180px;margin:auto;padding:22px}
+
+/* ===== TOPBAR ===== */
 .topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
   background:var(--glass);
   border:1px solid var(--border);
-  padding:14px;
-  border-radius:18px;
-  backdrop-filter:blur(14px);
+  padding:16px 20px;
+  border-radius:22px;
+  backdrop-filter:blur(20px) saturate(1.2);
+  -webkit-backdrop-filter:blur(20px) saturate(1.2);
+  box-shadow:var(--shadow);
+  opacity:0;
+  animation:dropIn .7s cubic-bezier(.2,.8,.2,1) .05s forwards;
 }
-.brand{display:flex;align-items:center;gap:10px}
-.brand img{width:45px}
-.pageTitle{text-align:center}
-.pageTitle h1{margin:0;font-size:18px}
-.branch{font-size:12px;color:var(--muted)}
+@keyframes dropIn{ from{opacity:0; transform:translateY(-14px)} to{opacity:1; transform:translateY(0)} }
 
-.card{
-  margin-top:20px;
+.brand{display:flex;align-items:center;gap:13px}
+.brand .logoBox{
+  width:54px;height:54px;
+  border-radius:16px;
   background:var(--glass);
   border:1px solid var(--border);
-  border-radius:20px;
-  padding:18px;
-  backdrop-filter:blur(14px);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  box-shadow:0 12px 24px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.1);
+  position:relative;
+}
+.brand .logoBox::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.18) 48%, transparent 66%);
+  transform:translateX(-120%);
+  animation:sheen 5s ease-in-out infinite;
+}
+@keyframes sheen{ 0%,60%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
+.brand img{width:70%;height:70%;object-fit:contain;filter:drop-shadow(0 4px 8px rgba(0,0,0,.5)); position:relative; z-index:1;}
+.brand .name{font-weight:800; font-size:15px; color:var(--ivory); letter-spacing:.3px;}
+.brand .sub{font-size:11.5px;color:var(--muted); letter-spacing:1px; margin-top:2px; text-transform:uppercase;}
+
+.pageTitle{text-align:center}
+.pageTitle h1{
+  margin:0;
+  font-size:19px;
+  font-weight:800;
+  letter-spacing:.5px;
+  background:linear-gradient(100deg,#5b636b 0%, #f4f6f8 22%, #ffffff 45%, #a9b3bd 60%, #f4f6f8 82%, #5b636b 100%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shimmerText 6s linear infinite;
+}
+@keyframes shimmerText{ 0%{background-position:0% 50%} 100%{background-position:220% 50%} }
+.pageTitle .count{
+  margin-top:4px;
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:.5px;
+}
+.pageTitle .count b{color:var(--onyx-1); font-weight:800;}
+
+.branch{
+  font-size:12px;
+  color:var(--onyx-1);
+  font-weight:700;
+  padding:9px 16px;
+  border-radius:999px;
+  border:1px solid var(--border-strong);
+  background:var(--glass);
+  letter-spacing:1.5px;
+  position:relative;
+}
+.branch::before{
+  content:"";
+  position:absolute; inset:-1px;
+  border-radius:999px;
+  padding:1px;
+  background:linear-gradient(120deg, transparent, rgba(230,234,238,.6), transparent);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  opacity:.7;
+}
+
+/* ===== CARD / GRID ===== */
+.card{
+  margin-top:24px;
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:26px;
+  padding:22px;
+  backdrop-filter:blur(24px) saturate(1.1);
+  -webkit-backdrop-filter:blur(24px) saturate(1.1);
+  box-shadow:var(--shadowStrong);
+  position:relative;
+  overflow:hidden;
+  opacity:0;
+  animation:dropIn .7s cubic-bezier(.2,.8,.2,1) .18s forwards;
+}
+.card::after{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(230,234,238,.55), transparent);
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
   gap:16px;
 }
 
 .videoIcon{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.15);
+  position:relative;
+  background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.01));
+  border:1px solid var(--border);
   border-radius:18px;
   overflow:hidden;
   cursor:pointer;
-  transition:.3s;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1), border-color .3s ease, box-shadow .3s ease;
+  opacity:0;
+  transform:translateY(16px) scale(.97);
+  will-change:transform;
 }
-.videoIcon:hover{transform:translateY(-5px); box-shadow:0 15px 35px rgba(0,0,0,.4);}
-.videoIcon img{
-  width:100%;
-  aspect-ratio:9/16;
-  object-fit:cover;
+.videoIcon.show{
+  animation:cardIn .55s cubic-bezier(.2,.8,.2,1) forwards;
 }
-.caption{
-  padding:10px;
-  text-align:center;
-  font-weight:700;
+@keyframes cardIn{ to{opacity:1; transform:translateY(0) scale(1)} }
+
+.videoIcon::before{
+  content:"";
+  position:absolute; inset:0; z-index:2;
+  background:linear-gradient(180deg, rgba(255,255,255,.1), transparent 42%);
+  pointer-events:none;
+}
+.videoIcon::after{
+  content:"";
+  position:absolute; inset:0; z-index:2;
+  background:linear-gradient(120deg, transparent 35%, rgba(255,255,255,.16) 50%, transparent 65%);
+  transform:translateX(-140%);
+  pointer-events:none;
+}
+.videoIcon:hover::after{ animation:sheen2 1s ease; }
+@keyframes sheen2{ to{ transform:translateX(140%);} }
+
+.videoIcon:hover{
+  transform:translateY(-7px) scale(1.015);
+  border-color:rgba(230,234,238,.5);
+  box-shadow:0 24px 48px rgba(0,0,0,.65), 0 0 26px rgba(143,214,255,.1);
+}
+.videoIcon:focus-visible{
+  outline:2px solid var(--sky);
+  outline-offset:2px;
 }
 
-.playerWrap{display:none;margin-top:20px}
-.playerBox{
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid var(--border);
+.thumbWrap{position:relative; width:100%; aspect-ratio:9/16; background:linear-gradient(160deg,#0e1114,#020304); overflow:hidden;}
+.thumbWrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0;
+  transition:opacity .4s ease, transform .35s ease;
 }
+.thumbWrap img.loaded{opacity:1;}
+.videoIcon:hover .thumbWrap img{transform:scale(1.07);}
+
+.skeleton{
+  position:absolute; inset:0;
+  background:linear-gradient(100deg, rgba(255,255,255,.02) 20%, rgba(255,255,255,.08) 40%, rgba(255,255,255,.02) 60%);
+  background-size:200% 100%;
+  animation:skeletonMove 1.4s ease-in-out infinite;
+}
+@keyframes skeletonMove{ 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.thumbWrap img.loaded ~ .skeleton{display:none;}
+
+.playIcon{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(.85);
+  width:42px;height:42px;
+  border-radius:50%;
+  background:rgba(2,3,4,.6);
+  border:1px solid rgba(230,234,238,.4);
+  backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  z-index:3;
+  opacity:0;
+  transition:opacity .25s ease, transform .25s ease;
+}
+.playIcon .ring{
+  position:absolute; inset:-1px;
+  border-radius:50%;
+  border:1px solid rgba(230,234,238,.55);
+  opacity:0;
+}
+.videoIcon:hover .playIcon{opacity:1; transform:translate(-50%,-50%) scale(1);}
+.videoIcon:hover .playIcon .ring{opacity:1; animation:pulseRing 1.3s ease-out infinite;}
+@keyframes pulseRing{ 0%{transform:scale(1); opacity:.7;} 100%{transform:scale(1.7); opacity:0;} }
+.playIcon svg{width:15px;height:15px;fill:#fff;margin-inline-start:2px; position:relative; z-index:1;}
+
+.caption{
+  padding:11px;
+  text-align:center;
+  font-weight:700;
+  font-size:13.5px;
+  color:var(--onyx-1);
+  border-top:1px solid var(--border);
+  letter-spacing:.4px;
+  position:relative;
+  z-index:1;
+  background:linear-gradient(180deg, transparent, rgba(0,0,0,.25));
+}
+
+/* ===== CINEMATIC LIGHTBOX PLAYER ===== */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(1,1,2,.88);
+  backdrop-filter:blur(10px) saturate(1.05);
+  -webkit-backdrop-filter:blur(10px) saturate(1.05);
+  z-index:50;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  opacity:0;
+  transition:opacity .3s ease;
+}
+.overlay.open{display:flex;}
+.overlay.visible{opacity:1;}
+
+.playerBox{
+  width:min(92vw, 420px);
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--border-strong);
+  background:linear-gradient(180deg, rgba(20,22,26,.92), rgba(3,4,5,.97));
+  box-shadow:0 40px 120px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.03) inset;
+  transform:scale(.92) translateY(18px);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  position:relative;
+}
+.overlay.visible .playerBox{transform:scale(1) translateY(0);}
+.playerBox::before{
+  content:"";
+  position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(230,234,238,.75), transparent);
+  z-index:2;
+}
+
 .playerTop{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:12px;
-  background:rgba(255,255,255,.06);
+  padding:14px 16px;
+  background:rgba(255,255,255,.03);
+  border-bottom:1px solid var(--border);
+  position:relative;
+  z-index:1;
+}
+#videoTitle{font-weight:800; color:var(--ivory); font-size:15px; letter-spacing:.4px;}
+
+.closeBtn{
+  width:32px;height:32px;
+  border-radius:50%;
+  border:1px solid var(--border-strong);
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  color:#fff;
+  transition:background .2s ease, transform .2s ease, border-color .2s ease;
+  padding:0;
+}
+.closeBtn:hover{background:rgba(255,90,90,.18); border-color:rgba(255,120,120,.5); transform:rotate(90deg);}
+.closeBtn svg{width:14px;height:14px;}
+
+.stageWrap{
+  position:relative;
+  background:#000;
+}
+.stageWrap::before{
+  content:"";
+  position:absolute; inset:0;
+  box-shadow:inset 0 0 80px rgba(0,0,0,.75);
+  z-index:2;
+  pointer-events:none;
 }
 iframe{
   width:100%;
   aspect-ratio:9/16;
   border:0;
+  display:block;
+  max-height:78vh;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
 }
 
-button{
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.2);
-  color:#fff;
-  padding:6px 14px;
-  border-radius:12px;
-  cursor:pointer;
-  font-weight:600;
+.playerLoading{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  z-index:3;
+  color:var(--muted);
+  font-size:12px;
+  gap:8px;
+  flex-direction:column;
 }
-button:hover{background:rgba(255,255,255,.25)}
+.spinner{
+  width:26px;height:26px;
+  border-radius:50%;
+  border:2px solid rgba(255,255,255,.12);
+  border-top-color:var(--onyx-1);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{ to{transform:rotate(360deg)} }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg, rgba(230,234,238,.35), rgba(169,179,189,.2)); border-radius:20px;}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important;}
+}
+
+@media (max-width:520px){
+  .wrap{padding:14px}
+  .topbar{padding:12px 14px; border-radius:18px; flex-direction:column; align-items:stretch; text-align:center;}
+  .pageTitle{order:-1}
+  .card{padding:14px; border-radius:20px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr)); gap:11px}
+  .playerBox{width:100%;}
+  iframe{max-height:68vh}
+}
 </style>
 </head>
 
 <body>
+<div class="orb a"></div>
+<div class="orb b"></div>
+
 <div class="wrap">
 
 <div class="topbar">
   <div class="brand">
-    <img src="logo.png">
+    <div class="logoBox"><img src="logo.png"></div>
     <div>
-      <div style="font-weight:800">SMOU GROUP</div>
-      <div style="font-size:12px;color:var(--muted)">Black Cabin</div>
+      <div class="name">SMOU GROUP</div>
+      <div class="sub">Black Cabin</div>
     </div>
   </div>
 
   <div class="pageTitle">
-    <h1>فيديوهات الفضي</h1>
+    <h1>فيديوهات الأسود</h1>
+    <div class="count"><b id="vidCount">0</b> فيديو</div>
   </div>
 
   <div class="branch">UAE</div>
 </div>
 
 <div class="card">
-
 <div class="grid" id="grid"></div>
+</div>
 
-<div class="playerWrap" id="playerWrap">
+</div>
+
+<!-- Cinematic Lightbox -->
+<div class="overlay" id="overlay">
   <div class="playerBox">
     <div class="playerTop">
       <div id="videoTitle"></div>
-      <button onclick="backToList()">رجوع للقائمة</button>
+      <button class="closeBtn" onclick="closePlayer()" aria-label="إغلاق">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </div>
-    <div id="iframeBox"></div>
+    <div class="stageWrap" id="stageWrap">
+      <div class="playerLoading" id="playerLoading">
+        <div class="spinner"></div>
+        <span>جاري التحميل...</span>
+      </div>
+      <div id="iframeBox"></div>
+    </div>
   </div>
-</div>
-
-</div>
 </div>
 
 <script>
 
-// جدول الفيديوهات
-// جدول الفيديوهات
+// جدول الفيديوهات — لم يتم تغيير أي رابط أو اسم
 const videos = [
   {name:"B1", url:"https://youtube.com/shorts/ZhCVhHh2ZYE"},
   {name:"B2", url:"https://youtube.com/shorts/jV06sjc4SAE"},
@@ -184,58 +496,111 @@ const videos = [
   {name:"B30", url:"https://youtube.com/shorts/ewr6PAqhutc"}
 ];
 
-// استخراج ID من Shorts
+// استخراج ID من رابط الشورتس (مع معالجة احتياطية للروابط غير القياسية)
 function getYouTubeId(url){
-  const u = new URL(url);
-  if(u.pathname.includes("/shorts/")){
-    return u.pathname.split("/shorts/")[1].split("?")[0];
-  }
-  if(u.searchParams.get("v")) return u.searchParams.get("v");
-  return "";
+  try{
+    const u = new URL(url);
+    if(u.pathname.includes("/shorts/")){
+      return u.pathname.split("/shorts/")[1].split("?")[0];
+    }
+    if(u.searchParams.get("v")) return u.searchParams.get("v");
+  }catch(e){ /* رابط غير قياسي — نكمل بالطريقة الاحتياطية بالأسفل */ }
+
+  const m = url.match(/shorts\/([A-Za-z0-9_-]{6,})/);
+  return m ? m[1] : "";
 }
 
 const grid=document.getElementById("grid");
-const playerWrap=document.getElementById("playerWrap");
+const overlay=document.getElementById("overlay");
 const iframeBox=document.getElementById("iframeBox");
 const videoTitle=document.getElementById("videoTitle");
+const playerLoading=document.getElementById("playerLoading");
+const vidCount=document.getElementById("vidCount");
 
 function render(){
   grid.innerHTML="";
-  videos.forEach((v,i)=>{
+  vidCount.textContent = videos.length;
+
+  // ترتيب تنازلي: B30 بالأعلى، B1 بالأسفل
+  const order = videos.map((_, i) => i).reverse();
+
+  order.forEach((i)=>{
+    const v = videos[i];
     const id=getYouTubeId(v.url);
     const thumb=`https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-    grid.innerHTML+=`
-      <div class="videoIcon" onclick="openVideo(${i})">
-        <img src="${thumb}">
-        <div class="caption">${v.name}</div>
-      </div>`;
+
+    const cell = document.createElement("div");
+    cell.className = "videoIcon";
+    cell.tabIndex = 0;
+    cell.setAttribute("role","button");
+    cell.setAttribute("aria-label", "تشغيل " + v.name);
+    cell.innerHTML = `
+      <div class="thumbWrap">
+        <img loading="lazy" src="${thumb}" alt="${v.name}">
+        <div class="skeleton"></div>
+        <div class="playIcon"><span class="ring"></span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+      </div>
+      <div class="caption">${v.name}</div>`;
+
+    cell.addEventListener("click", ()=>openVideo(i));
+    cell.addEventListener("keydown", (e)=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openVideo(i);} });
+
+    const img = cell.querySelector("img");
+    img.addEventListener("load", ()=> img.classList.add("loaded"));
+
+    grid.appendChild(cell);
   });
+
+  // ظهور تدريجي عند التمرير
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach((entry)=>{
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const delay = (Array.from(grid.children).indexOf(el) % 12) * 45;
+        el.style.animationDelay = delay + "ms";
+        el.classList.add("show");
+        io.unobserve(el);
+      }
+    });
+  }, {threshold:0.12, rootMargin:"0px 0px -40px 0px"});
+
+  document.querySelectorAll(".videoIcon").forEach(el=> io.observe(el));
 }
 
 function openVideo(index){
   const v=videos[index];
   const id=getYouTubeId(v.url);
   videoTitle.textContent=v.name;
-  iframeBox.innerHTML=`
-    <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0"
-    allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-  grid.style.display="none";
-  playerWrap.style.display="block";
-  window.scrollTo({top:0,behavior:"smooth"});
+
+  playerLoading.style.display="flex";
+  iframeBox.innerHTML="";
+
+  const iframe = document.createElement("iframe");
+  iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+  iframe.allow = "autoplay; encrypted-media";
+  iframe.allowFullscreen = true;
+  iframe.addEventListener("load", ()=>{ playerLoading.style.display="none"; });
+  iframeBox.appendChild(iframe);
+
+  overlay.classList.add("open");
+  requestAnimationFrame(()=> overlay.classList.add("visible"));
+  document.body.style.overflow="hidden";
 }
 
-function backToList(){
-  iframeBox.innerHTML="";
-  playerWrap.style.display="none";
-  grid.style.display="grid";
+function closePlayer(){
+  overlay.classList.remove("visible");
+  document.body.style.overflow="";
+  setTimeout(()=>{
+    overlay.classList.remove("open");
+    iframeBox.innerHTML="";
+  }, 300);
 }
+
+overlay.addEventListener("click", (e)=>{ if(e.target===overlay) closePlayer(); });
+document.addEventListener("keydown", (e)=>{ if(e.key==="Escape" && overlay.classList.contains("open")) closePlayer(); });
 
 render();
 </script>
 
 </body>
 </html>
-
-
-
-
